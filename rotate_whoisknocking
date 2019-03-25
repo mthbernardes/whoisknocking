@@ -1,0 +1,10 @@
+/var/log/iptables.log {
+    daily
+    missingok
+    rotate 0
+    shred
+    nomail
+    compress
+    notifempty
+}
+

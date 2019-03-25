@@ -1,0 +1,17 @@
+*filter
+
+# FORWARD RULES
+:FORWARD DROP [0:0]
+
+# OUTPUT RULES
+:OUTPUT ACCEPT [0:0]
+
+# INPUT RULES
+:INPUT ACCEPT [0:0]
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -p tcp -m state --state NEW -m limit --limit 1/second -m multiport --dports  1:65535 -j LOG --log-prefix "[PORTSCAN_DETECTED] " --log-level 4
+-A INPUT -j DROP
+
+COMMIT
+
